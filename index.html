@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilo.css">
+    <title>Estilo</title>
+</head>
+<body>
+    <div id="app">
+        <header class="header">
+            <img src="assets/techno.svg" alt="logo">
+            <div class="carrinho_menu">{{carrinhoTotal}} |</div>
+
+        </header>
+
+    <section class="modal" v-if="produto">
+        <button @click="produto = false" class="btn-fechar">X</button>
+        <div class="modal_container">
+            <div class="modal_img">
+                <img :src="produto.img" alt="produto.id">
+            </div>
+            <div>
+            <div class="modal_dados">
+                <span class="modal_preco">{{produto.preco}}</span>
+                <h2 class="modal_titulo">{{produto.nome}}</h2>
+                <p>{{produto.descricao}}</p>
+                <p>{{produto.estoque}}</p>
+                <button class="modal_btn" @click="adicionarItem">Adicionar Item</button>
+            </div>
+            <div class="avaliacao">
+                <ul>
+                    <li v-for="avaliacao in produto.reviews">
+                    <p>{{avaliacao.descricao}}</p>
+                    <p>{{avaliacao.nome}} | {{avaliacao.estrelas}}Estrelas</p>
+                    </li>
+                </ul>
+            </div>
+            
+        </div>
+        </div>    
+    </section>    
+
+     <section class="produtos">
+         <div v-for="item in produtos" :key="item.id" @click="buscarProduto(item.id)" class="produto">
+            <img :src="item.img" alt="item.nome" class="produto_img">
+            <div class="produto_info">
+                <span class="produto_preco">
+                    {{item.preco | numeroPreco}}</span>
+                <h2 class="produto.titulo">{{item.nome}}</h2>
+            </div>
+         </div>
+     </section>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="app.js"></script>
+    <script src="vue.js"></script>
+</body>
+</html>
